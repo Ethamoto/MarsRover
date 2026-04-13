@@ -3,6 +3,8 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,11 +42,38 @@ namespace mars_rover.Input_Layer
         }
 
         
-        public static Instruction InstructionParser(string stringInput)
+        public static List<Instruction> InstructionParser(string stringInput)
         {
+            char [] SplitStringArray = stringInput.Trim().ToUpper().ToArray();
+            char[] ValidInputs = {'L', 'R', 'M' };
+            
+
+            bool checkInputIsValid = SplitStringArray.All(element => ValidInputs.Contains(element)) && SplitStringArray.Length > 0;
+           
+            if (!checkInputIsValid)
+            {
+                throw new FormatException("Your input was not valid. " +
+                    "Valid inputs are L for Left 90 degreed, " +
+                    "R for right 90 degrees and M for move forward 1. e.g. L,M,R \n" +
+                    "Please try again.");
+            }
+
+            Dictionary <char,Instruction> MapDictionary = new Dictionary<char, Instruction>
+            {
+                { 'L',Instruction.L },
+                { 'R',Instruction.R },
+                { 'M',Instruction.M },
+            };
+
+            List<Instruction> listToReturn = new List<Instruction> {};
+
+            foreach (char instruction in SplitStringArray)
+            {
+                listToReturn.Add(MapDictionary[instruction]);
+            }
 
 
-            return Instruction.L;
+            return listToReturn;
         }
     }
 }
