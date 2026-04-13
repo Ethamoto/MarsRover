@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mars_rover
+namespace mars_rover.Enums
 {
-    internal class Class2
+    public enum CompassDirection
     {
+        North,
+        East,
+        South,
+        West
+
     }
 }
