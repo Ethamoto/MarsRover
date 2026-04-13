@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
@@ -15,18 +16,29 @@ namespace mars_rover.Input_Layer
         
         public static (int,int,CompassDirection) PositionParser(string stringInput)
         {
-            string[] input = stringInput.Trim().Split(",");
 
-            bool xsuccess = int.TryParse(input[0], out int xCoordinate);
-            bool ysuccess = int.TryParse(input[1], out int yCoordinate);
-            
-            string compassDirecton = input[2].ToLower();
-            string[] validDirections = { "n","e","s","w" };
-            
-            if (!validDirections.Contains(compassDirecton) | !xsuccess | !ysuccess)
-                 
+            char[] input = stringInput.Trim().ToArray();
+
+            //Deal with length that is not exactly 3 characters
+            if (input.Length !=3)
             {
-                throw new FormatException("You must input Postions in the following format - Xcoordinate, Ycoordinate, Direction e.g. 5,4,N \n" +
+                throw new FormatException("You must input Postions in the following format - Xcoordinate, Ycoordinate, Direction e.g. 54N \n" +
+                                          "The co-ordinates for the rover have not been parsed correctly, please try again ");
+            }
+
+            string[] stringInputArr = new string[3];
+
+            bool xsuccess = int.TryParse(input[0].ToString(), out int xCoordinate);
+            bool ysuccess = int.TryParse(input[1].ToString(), out int yCoordinate);
+
+            string compassDirecton = input[2].ToString().ToLower();
+            string[] validDirections = { "n", "e", "s", "w" };
+
+            //Make sure the three characters fits thw x,y,direction format
+            if (!validDirections.Contains(compassDirecton) || !xsuccess || !ysuccess)
+
+            {
+                throw new FormatException("You must input Postions in the following format - Xcoordinate, Ycoordinate, Direction e.g. 54N \n" +
                                           "The co-ordinates for the rover have not been parsed correctly, please try again ");
             }
 
@@ -39,6 +51,7 @@ namespace mars_rover.Input_Layer
 
 
             return (xCoordinate, yCoordinate, compassDirectionReturn);
+            //return (xCoordinate, yCoordinate, CompassDirection.South);
         }
 
         
@@ -47,9 +60,9 @@ namespace mars_rover.Input_Layer
             char [] SplitStringArray = stringInput.Trim().ToUpper().ToArray();
             char[] ValidInputs = {'L', 'R', 'M' };
             
-
             bool checkInputIsValid = SplitStringArray.All(element => ValidInputs.Contains(element)) && SplitStringArray.Length > 0;
-           
+
+            Console.WriteLine(checkInputIsValid);
             if (!checkInputIsValid)
             {
                 throw new FormatException("Your input was not valid. " +
