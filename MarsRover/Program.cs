@@ -12,11 +12,11 @@ namespace mars_rover
 
             //Rover1
             var RoverOnePostion = InputParser.PositionParser("12N");
-            //var RoverOneInstructions = InputParser.InstructionParser("LMLMLMLMM");
+            var RoverOneInstructions = InputParser.InstructionParser("LMLMLMLMM");
 
             ////Rover2
-            //var RoverTwoPostion = InputParser.PositionParser("33E");
-            //var RoverTwoInstructions = InputParser.InstructionParser("MMRMMRMRRM");
+            var RoverTwoPostion = InputParser.PositionParser("33E");
+            var RoverTwoInstructions = InputParser.InstructionParser("MMRMMRMRRM");
 
         }
     }
