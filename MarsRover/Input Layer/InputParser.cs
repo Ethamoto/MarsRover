@@ -51,7 +51,6 @@ namespace mars_rover.Input_Layer
 
 
             return (xCoordinate, yCoordinate, compassDirectionReturn);
-            //return (xCoordinate, yCoordinate, CompassDirection.South);
         }
 
         
@@ -62,7 +61,6 @@ namespace mars_rover.Input_Layer
             
             bool checkInputIsValid = SplitStringArray.All(element => ValidInputs.Contains(element)) && SplitStringArray.Length > 0;
 
-            Console.WriteLine(checkInputIsValid);
             if (!checkInputIsValid)
             {
                 throw new FormatException("Your input was not valid. " +
