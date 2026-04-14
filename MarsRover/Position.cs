@@ -10,7 +10,7 @@ namespace mars_rover
     public class Position
     {
         public CompassDirection DirectionFacing { get; set; }
-        public int XCorodinate { get; set; }
-        public int YCorodinate { get; set;}
+        public int XCoordinate { get; set; }
+        public int YCoordinate { get; set;}
     }
 }

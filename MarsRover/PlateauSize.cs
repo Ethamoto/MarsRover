@@ -12,8 +12,6 @@ namespace mars_rover
         public int XBoundry { get; set; } = 0;
         public int YBoundry { get; set; } = 0;
 
-        public int SizeOfPlateau { get; set; } = 0;
-
         public PlateauSize(int xBoundry, int yBoundry) 
         {
             XBoundry = xBoundry;
