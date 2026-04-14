@@ -8,8 +8,8 @@ namespace mars_rover.Enums
 {
     public enum Instruction
     {
-        L =1,
-        R =2,
-        M =3
+        L,
+        R,
+        M
     }
 }
